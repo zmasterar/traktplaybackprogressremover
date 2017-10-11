@@ -1,0 +1,7 @@
+<h1>Welcome to Trakt playback progress remover</h1>
+
+<% if cookies[:token] %>
+  <p>You can visit your <%= link_to "all or items in progress", playback_path %></p>
+<% else %>
+  <p>First you have to Authorize this app: <%= link_to "Authorize", authorize_path %> </p>
+<% end %>

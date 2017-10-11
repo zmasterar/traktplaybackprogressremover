@@ -1,0 +1,16 @@
+<h1>Playback progress</h1>
+<% unless @body.empty? %>
+  <ul>
+    <% @body.each do |item| %>
+      <li>
+        <% if item["type"]=="episode" %>
+          <b><%= item["show"]["title"] %></b> - Season <%= item["episode"]["season"] %> Episode <%= item["episode"]["number"] %> - <b><%= item["progress"].to_d(2) %>%</b> <%= button_to "Delete", delete_playback_path, params: {id: item["id"]} %>
+        <% else %>
+          <b><%= item["movie"]["title"] %></b> - <b><%= item["progress"].to_d(2) %>%</b> <%= button_to "Delete", delete_playback_path, params: {id: item["id"]} %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h2>Yay! no movie or episode is half way!</h2>
+<% end %>
