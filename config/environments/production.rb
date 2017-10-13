@@ -83,5 +83,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_controller.default_url_options = {  :host => "www.example.com"  }
+
+  #Define host for correct link generation
+  config.action_controller.default_url_options = {  :host => "traktprogressremover.herokuapp.com"  }
 end

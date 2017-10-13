@@ -11,7 +11,7 @@ class Trakt
       @token = token if token
     end
     @client_secret = ENV["TRAKT_CLIENT_SECRET"]
-    @redirect_uri = "http://localhost:3000/token"
+    @redirect_uri = Rails.env.production? ? "https://traktprogressremover.herokuapp.com/token" : "http://localhost:3000/token"
   end
 
   def get_token(code)
