@@ -59,19 +59,19 @@ class CalendarsController < ApplicationController
   end
 
   def begin_date_str(show)
-    DateTime.parse(show["first_aired"]).new_offset("-3:00").strftime("%d/%m/%Y %I:%M%P")
+    DateTime.parse(show["first_aired"]).strftime("%d/%m/%Y %I:%M%P")
   end
 
   def begin_date(show)
-    DateTime.parse(show["first_aired"]).new_offset("-3:00")
+    DateTime.parse(show["first_aired"])
   end
 
   def end_date_str(show)
-    (DateTime.parse(show["first_aired"]).new_offset("-3:00") + show["episode"]["runtime"].minutes).strftime("%d/%m/%Y %I:%M%P")
+    (DateTime.parse(show["first_aired"]) + show["episode"]["runtime"].minutes).strftime("%d/%m/%Y %I:%M%P")
   end
 
   def end_date(show)
-    DateTime.parse(show["first_aired"]).new_offset("-3:00") + show["episode"]["runtime"].minutes
+    DateTime.parse(show["first_aired"]) + show["episode"]["runtime"].minutes
   end
 
   def set_calendar(user)
