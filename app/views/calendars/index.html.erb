@@ -1,0 +1,9 @@
+<p><%= link_to "Download Calendar", "/calendar.ics" %></p>
+<p> <%= link_to "Public calendar link", "/calendar/#{user_slug(@user)}/#{user_uuid(@user)}.ics", class: "btn btn-primary"  %></p>
+
+<h1>Events for <%= user_slug(@user) %></h1>
+<% @body.each do |show| %>
+  <p><%= show_title(show) %> <%= episode_number(show) %></p>
+  <p><%= episode_overview(show) %></p>
+  <p><%= begin_date_str(show) %> - <%= end_date_str(show) %> </p>
+<% end %>

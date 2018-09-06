@@ -12,11 +12,18 @@ class TraktController < ApplicationController
   def get_token
     @trakt = Trakt.new
     response = @trakt.get_token(params[:code])
-    cookies[:token]=response.parsed_response["access_token"]
+    cookies[:token]=response["access_token"]
+    set_trakt
+    @user = @trakt.user_settings
+    u=User.where(username: @user["user"]["username"]).first_or_create(user_uuid: SecureRandom.uuid)
+    u.trakt_token=response["access_token"]
+    u.save
     redirect_to root_path, notice: "Authenticated!"
   end
 
   def delete_token
+    @user = @trakt.user_settings
+    User.where(username: @user["user"]["username"]).destroy_all
     @trakt.delete_token
     cookies.delete :token
     redirect_to root_path, notice: "Access revoked!"
@@ -24,7 +31,7 @@ class TraktController < ApplicationController
 
   def playback
     response = @trakt.playback
-    @body=response.parsed_response
+    @body=response
   end
 
   def delete_playback
