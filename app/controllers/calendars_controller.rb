@@ -1,5 +1,5 @@
 class CalendarsController < ApplicationController
-  before_action :set_trakt, except: [:home, :authorize, :get_token]
+  before_action :set_trakt, except: [:home, :authorize, :get_token, :public_calendar]
 
   def index
     @trakt_user=@trakt.user_settings
@@ -35,6 +35,7 @@ class CalendarsController < ApplicationController
         @cal.publish
         @cal.append_custom_property("X-WR-CALNAME","My Shows")
         @user=User.find_by(username: params[:user_slug])
+        @trakt = Trakt.new(@user.trakt_token)
 
         if params[:user_uuid] == @user.user_uuid
           @calendar=set_calendar(@user)
