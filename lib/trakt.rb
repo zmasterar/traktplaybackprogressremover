@@ -31,7 +31,9 @@ class Trakt
   end
 
   def get_calendar(date_from=Date.today.to_s, days=31)
-    self.class.get("/calendars/my/shows/#{date_from}/#{days}?extended=full", headers: @headers).parsed_response
+    r=self.class.get("/calendars/my/shows/#{date_from}/#{days}?extended=full", headers: @headers)
+    puts "Trakt response code: "+r.code.to_s
+    r.parsed_response
   end
 
   def user_settings
