@@ -29,7 +29,7 @@ task :mail_today_shows => :environment do
     trakt = Trakt.new(user.trakt_token)
     mail=trakt.user_settings["user"]["location"]
     @today_shows = trakt.get_calendar(Date.today.to_s,1)
-    if @today_shows.count > 1
+    if @today_shows.count > 0
       CalendarMailer.today_shows(mail,@today_shows).deliver_now
     end
   end
