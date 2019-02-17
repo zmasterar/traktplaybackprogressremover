@@ -1,0 +1,8 @@
+<h2>Today Shows:</h2>
+
+<% @today_shows.each do |show| %>
+  <p><%= show["show"]["title"] %> <%= "S"+show["episode"]["season"].to_s.rjust(2, "0")+"E"+show["episode"]["number"].to_s.rjust(2, "0") %></p>
+  <p><%= show["episode"]["overview"] %></p>
+  <p><%= DateTime.parse(show["first_aired"]).strftime("%d/%m/%Y %I:%M%P") %> - <%= (DateTime.parse(show["first_aired"]) + show["episode"]["runtime"].minutes).strftime("%d/%m/%Y %I:%M%P") %> </p>
+<% end %>
+<p>-------------</p>
