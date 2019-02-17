@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180905211704) do
+ActiveRecord::Schema.define(version: 20190217043446) do
 
   create_table "calendars", force: :cascade do |t|
     t.text     "events"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20180905211704) do
     t.string   "trakt_token"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "email"
   end
 
 end

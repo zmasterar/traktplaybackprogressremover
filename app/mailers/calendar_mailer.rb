@@ -6,9 +6,10 @@ class CalendarMailer < ApplicationMailer
   end
 
   def today_shows
-    user = User.first
-    trakt = Trakt.new(user.trakt_token)
-    @today_shows = trakt.get_calendar(Date.today.to_s,1)
-    mail(to: "benja@zmaster.com.ar", subject: 'Today shows')
+    User.all.each do |user|
+      trakt = Trakt.new(user.trakt_token)
+      @today_shows = trakt.get_calendar(Date.today.to_s,1)
+      mail(to: trakt.user_settings["user"]["location"], subject: 'Today shows')
+    end
   end
 end

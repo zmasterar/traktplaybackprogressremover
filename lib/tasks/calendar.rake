@@ -23,3 +23,7 @@ task :calendar => :environment do
   end
 
 end
+
+task :mail_today_shows => :environment do
+  CalendarMailer.today_shows.deliver_now
+end
