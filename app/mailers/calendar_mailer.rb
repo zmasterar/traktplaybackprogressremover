@@ -1,5 +1,5 @@
 class CalendarMailer < ApplicationMailer
-  default from: 'benja@zmaster.com.ar'
+  default from: 'Traktplaybackprogressremover <benja@zmaster.com.ar>'
   
   def test
     mail(to: "benja@zmaster.com.ar", subject: 'Test mail')
