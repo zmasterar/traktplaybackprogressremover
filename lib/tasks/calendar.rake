@@ -30,6 +30,8 @@ task :mail_today_shows => :environment do
     mail=trakt.user_settings["user"]["location"]
     @today_shows = trakt.get_calendar(Date.today.to_s,1)
     if @today_shows.count > 0
+      thetvdb = Thetvdb.new
+      @today_shows.map!  {|show| show.merge({poster_url: thetvdb.get_poster(show["show"]["ids"]["tvdb"])})}
       CalendarMailer.today_shows(mail,@today_shows).deliver_now
     end
   end
