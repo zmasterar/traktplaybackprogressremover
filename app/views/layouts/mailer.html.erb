@@ -1,13 +1,87 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tonight shows</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-  <body>
-    <%= yield %>
+  <style type="text/css">
+
+      h1 {
+        font-size: 30px;
+      }
+
+      td {
+        vertical-align: top;
+      }
+
+      tr {
+        height:1px;
+      }
+
+      tr:last-child {
+        height:auto;
+      }
+
+      .container{
+        font-family: 'Roboto', sans-serif;
+        max-width: 600px; 
+        margin-left: auto; 
+        margin-right: auto;
+        background-color: #fff;
+        padding: 2em;
+        padding-bottom: 1em;
+      }
+      
+      .episode-title{
+        color: #0088cc;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .episode-title > span {
+        color: #82B3CC;
+        font-size: 12px;
+      }
+
+      .show-title {
+        color: #0088cc;
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 2px;
+      }
+
+      .show {
+        margin-top: 1em;
+        margin-bottom: 2em;
+      }
+
+      .summary{
+        font-size: 14px;
+      }
+
+      .time {
+        color: #95a5a6;
+        font-size: 14px;
+      }
+
+      .image {
+        padding-right: 1em;
+      }
+
+      .image-placeholder {
+        background: steelblue;
+        width: 72px;
+        height: 112px;
+      }
+
+  </style>
+</head>
+
+  <body style="background-color: #F6F4F5;">
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

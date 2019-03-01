@@ -1,8 +1,12 @@
-<h2>Today Shows:</h2>
+<h1>Tonight Shows</h1>
 
-<% @today_shows.each do |show| %>
-  <h3><%= show["show"]["title"] %> <%= "S"+show["episode"]["season"].to_s.rjust(2, "0")+"E"+show["episode"]["number"].to_s.rjust(2, "0") %></h3>
-  <h4><%= show["episode"]["overview"] %></h4>
-  <p><%= DateTime.parse(show["first_aired"]).strftime("%d/%m/%Y %I:%M%P") %> - <%= (DateTime.parse(show["first_aired"]) + show["episode"]["runtime"].minutes).strftime("%d/%m/%Y %I:%M%P") %> </p>
-  
-<% end %>
+  <% @today_shows.each do |show| %>
+    <div class="show">
+      <table class="shows">
+        <tr><td rowspan=4 class="image"><div class="image-placeholder"></div></td><td class="show-title"><%= show["show"]["title"] %></td></tr>
+        <tr><td class="episode-title"><%= show["episode"]["title"] %> <span><%= "S"+show["episode"]["season"].to_s.rjust(2, "0")+"E"+show["episode"]["number"].to_s.rjust(2, "0") %></span></td></tr>
+        <tr><td class="summary"><%= show["episode"]["overview"] %></td></tr>
+        <tr><td class="time"><%= DateTime.parse(show["first_aired"]).strftime("%d/%m/%Y %I:%M%P") %> - <%= (DateTime.parse(show["first_aired"]) + show["episode"]["runtime"].minutes).strftime("%d/%m/%Y %I:%M%P") %></td> </tr>
+      </table>
+    </div>
+  <% end %>

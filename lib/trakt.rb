@@ -30,7 +30,7 @@ class Trakt
     self.class.delete("/sync/playback/#{id}", headers: @headers).parsed_response
   end
 
-  def get_calendar(date_from=Date.today.to_s, days=31)
+  def get_calendar(date_from=Date.today.to_s, days=60)
     r=self.class.get("/calendars/my/shows/#{date_from}/#{days}?extended=full", headers: @headers)
     puts "Trakt response code: "+r.code.to_s
     r.parsed_response
