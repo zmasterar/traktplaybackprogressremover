@@ -6,7 +6,7 @@
         <tr><td rowspan=4 class="image"><div class="image-placeholder"><%= image_tag(show[:poster_url]) %></div></td><td class="show-title"><%= show["show"]["title"] %></td></tr>
         <tr><td class="episode-title"><%= show["episode"]["title"] %> <span><%= "S"+show["episode"]["season"].to_s.rjust(2, "0")+"E"+show["episode"]["number"].to_s.rjust(2, "0") %></span></td></tr>
         <tr><td class="summary"><%= show["episode"]["overview"] %></td></tr>
-        <tr><td class="time"><%= DateTime.parse(show["first_aired"]).strftime("%d/%m/%Y %I:%M%P") %> - <%= (DateTime.parse(show["first_aired"]) + show["episode"]["runtime"].minutes).strftime("%d/%m/%Y %I:%M%P") %></td> </tr>
+        <tr><td class="time"><%= DateTime.parse(show["first_aired"]).new_offset("-3:00").strftime("%d/%m/%Y %I:%M%P") %> - <%= (DateTime.parse(show["first_aired"]).new_offset("-3:00") + show["episode"]["runtime"].minutes).strftime("%d/%m/%Y %I:%M%P") %></td> </tr>
       </table>
     </div>
   <% end %>
