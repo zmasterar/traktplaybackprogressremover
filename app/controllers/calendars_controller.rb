@@ -9,10 +9,11 @@ class CalendarsController < ApplicationController
     @cal.publish
     @cal.append_custom_property("X-WR-CALNAME","My Shows")
     respond_to do |format|
-      format.html {@body=@trakt.get_calendar}
+      # format.html {@body=@trakt.get_calendar}
+      format.html {@body=@trakt.get_calendar(Date.today-31.days,31)+@trakt.get_calendar+@trakt.get_calendar(Date.today+30.days,30)+@trakt.get_calendar(Date.today+60.days,30)+@trakt.get_calendar(Date.today+90.days,30)} #trakt api can only send up to 31 days of events
       format.ics do
         @calendar=set_calendar(@user)
-        @body=@trakt.get_calendar(Date.today-30.days,30)+@trakt.get_calendar+@trakt.get_calendar(Date.today+31.days,31)
+        @body=@trakt.get_calendar(Date.today-31.days,31)+@trakt.get_calendar+@trakt.get_calendar(Date.today+30.days,30)+@trakt.get_calendar(Date.today+60.days,30)+@trakt.get_calendar(Date.today+90.days,30) #trakt api can only send up to 31 days of events
         @body.each do |show|
           event = Icalendar::Event.new
           event.dtstart     = begin_date(show)
@@ -39,7 +40,7 @@ class CalendarsController < ApplicationController
 
         if params[:user_uuid] == @user.user_uuid
           @calendar=set_calendar(@user)
-          @body=@trakt.get_calendar(Date.today-30.days,30)+@trakt.get_calendar+@trakt.get_calendar(Date.today+31.days,31)
+          @body=@trakt.get_calendar(Date.today-31.days,31)+@trakt.get_calendar+@trakt.get_calendar(Date.today+30.days,30)+@trakt.get_calendar(Date.today+60.days,30)+@trakt.get_calendar(Date.today+90.days,30) #trakt api can only send up to 31 days of events
           @body.each do |show|
             event = Icalendar::Event.new
             event.dtstart     = begin_date(show)

@@ -30,10 +30,10 @@ class Trakt
     self.class.delete("/sync/playback/#{id}", headers: @headers).parsed_response
   end
 
-  def get_calendar(date_from=Date.today.to_s, days=60)
+  def get_calendar(date_from=Date.today.to_s, days=30) #trakt api can only send up to 31 days of events
     r=self.class.get("/calendars/my/shows/#{date_from}/#{days}?extended=full", headers: @headers)
     puts "Trakt response code: "+r.code.to_s
-    r.parsed_response
+    r.parsed_response 
   end
 
   def user_settings
