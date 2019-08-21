@@ -18,7 +18,9 @@ class CalendarsController < ApplicationController
           event = Icalendar::Event.new
           event.dtstart     = begin_date(show)
           event.dtend       = end_date(show)
-          event.summary     = show_title(show)+ " " + episode_number(show)
+          event.summary     = show_title(show)+ " " + episode_number(show) + " - " + episode_title(show)
+          event.description = episode_overview(show) + "\n\n" + episode_url(show)
+          event.url = episode_url(show)
           @cal.add_event(event)
         end
         @events=@cal.to_ical
@@ -45,7 +47,9 @@ class CalendarsController < ApplicationController
             event = Icalendar::Event.new
             event.dtstart     = begin_date(show)
             event.dtend       = end_date(show)
-            event.summary     = show_title(show)+ " " + episode_number(show)
+            event.summary     = show_title(show)+ " " + episode_number(show) + " - " + episode_title(show)
+            event.description = episode_overview(show) + "\n\n" + episode_url(show)
+            event.url = episode_url(show)
             @cal.add_event(event)
           end
           @events=@cal.to_ical
@@ -64,6 +68,10 @@ class CalendarsController < ApplicationController
     @trakt = Trakt.new(cookies[:token])
   end
 
+  def episode_title(show)
+    show["episode"]["title"] ? show["episode"]["title"] : "No title"
+  end
+
   def show_title(show)
     show["show"]["title"]
   end
@@ -73,7 +81,7 @@ class CalendarsController < ApplicationController
   end
 
   def episode_overview(show)
-    show["episode"]["overview"]
+    show["episode"]["overview"] ? show["episode"]["overview"] : "No overview"
   end
 
   def begin_date_str(show)
@@ -94,5 +102,10 @@ class CalendarsController < ApplicationController
 
   def set_calendar(user)
     Calendar.where(user_id: user.id).first_or_create
+  end
+
+  def episode_url(show)
+    "https://trakt.tv/shows/" + show["show"]["ids"]["slug"]+"/seasons/" +
+      show["episode"]["season"].to_s + "/episodes/" + show["episode"]["number"].to_s
   end
 end
