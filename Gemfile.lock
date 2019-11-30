@@ -59,6 +59,7 @@ GEM
     bindex (0.8.1)
     builder (3.2.3)
     byebug (11.0.1)
+    coderay (1.1.2)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
@@ -110,6 +111,11 @@ GEM
     nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     pg (1.1.4)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-gem (1.0.0)
+      pry (~> 0.12)
     puma (3.12.1)
     rack (2.0.7)
     rack-test (1.1.0)
@@ -199,6 +205,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   pg
+  pry-gem
   puma (~> 3.0)
   rails (~> 6.0.1)
   sass-rails (~> 5.0)
