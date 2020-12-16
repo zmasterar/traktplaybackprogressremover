@@ -45,4 +45,12 @@ task mail_today_shows: :environment do
       puts 'No shows today'
     end
   end
+rescue Net::SMTPAuthenticationError => e
+  puts 'Gmail authentication error'
+  puts e
+rescue => e
+  puts "Oh, No! Something happend"
+  CalendarMailer.today_shows(mail, e).deliver_now
+ensure
+  puts "Task ended"
 end

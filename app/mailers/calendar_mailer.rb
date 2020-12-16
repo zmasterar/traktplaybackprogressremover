@@ -9,4 +9,9 @@ class CalendarMailer < ApplicationMailer
     @today_shows=shows
     mail(to: mail, subject: 'Today shows')
   end
+
+  def error_email(mail, error)
+    @error=error
+    mail(to: mail, subject: 'Today shows Error')
+  end
 end
