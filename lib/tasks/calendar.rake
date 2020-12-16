@@ -24,15 +24,17 @@ task :calendar => :environment do
 
 end
 
-task :mail_today_shows => :environment do
+  puts 'Executed task :mail_today_shows'
   User.all.each do |user|
     trakt = Trakt.new(user.trakt_token)
     mail=trakt.user_settings["user"]["location"]
     @today_shows = trakt.get_calendar((Date.today+1).to_s,1) #Date.today+1 beacuse trakt only works with utc
     if @today_shows.count > 0
       thetvdb = Thetvdb.new
-      @today_shows.map!  {|show| show.merge({poster_url: thetvdb.get_poster(show["show"]["ids"]["tvdb"])})}
-      CalendarMailer.today_shows(mail,@today_shows).deliver_now
+      puts 'Sent mail with today_shows'
+      puts 'Today shows:'
+      puts @today_shows
+      puts 'No shows today'
     end
   end
 end
