@@ -49,8 +49,8 @@ rescue Net::SMTPAuthenticationError => e
   puts 'Gmail authentication error'
   puts e
 rescue => e
-  puts "Oh, No! Something happend"
+  puts 'Oh, No! Something happend'
   CalendarMailer.today_shows(mail, e).deliver_now
 ensure
-  puts "Task ended"
+  puts 'Task ended'
 end
