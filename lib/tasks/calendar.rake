@@ -54,3 +54,9 @@ rescue => e
 ensure
   puts 'Task ended'
 end
+
+task test_mail: :environment do
+  puts 'Sending test mail'
+  CalendarMailer.error_email('benja@zmaster.com.ar', 'Hubo un error en algún lado')
+  puts 'Test mail sent'
+end
