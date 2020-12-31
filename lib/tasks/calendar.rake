@@ -57,6 +57,6 @@ end
 
 task test_mail: :environment do
   puts 'Sending test mail'
-  CalendarMailer.error_email('benja@zmaster.com.ar', 'Hubo un error en algún lado')
+  CalendarMailer.error_email('benja@zmaster.com.ar', 'Hubo un error en algún lado').deliver_now
   puts 'Test mail sent'
 end
