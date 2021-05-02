@@ -32,6 +32,8 @@ task mail_today_shows: :environment do
   puts 'Executed task :mail_today_shows'
   User.all.each do |user|
     trakt = Trakt.new(user.trakt_token)
+    raise 'There has been an error with trak authentication' unless trakt.user_settings
+
     mail = trakt.user_settings['user']['location']
     @today_shows = trakt.get_calendar((Date.today + 1).to_s, 1) # Date.today+1 beacuse trakt only works with utc
     if @today_shows.count.positive?
@@ -51,7 +53,7 @@ rescue Net::SMTPAuthenticationError => e
 rescue => e
   puts 'Oh, No! Something happend'
   mail ||= ENV['WEBMASTER_EMAIL']
-  CalendarMailer.today_shows(mail, e).deliver_now
+  CalendarMailer.error_email(mail, e).deliver_now
 ensure
   puts 'Task ended'
 end
