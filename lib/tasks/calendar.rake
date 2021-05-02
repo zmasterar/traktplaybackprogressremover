@@ -50,6 +50,7 @@ rescue Net::SMTPAuthenticationError => e
   puts e
 rescue => e
   puts 'Oh, No! Something happend'
+  mail ||= ENV['WEBMASTER_EMAIL']
   CalendarMailer.today_shows(mail, e).deliver_now
 ensure
   puts 'Task ended'
