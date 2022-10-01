@@ -19,7 +19,8 @@ class Trakt
   end
 
   def delete_token
-    self.class.post('/oauth/revoke', headers: @headers.merge!({"Content-Type": "application/x-www-form-urlencoded"}), body: {token: @token}).parsed_response
+    self.class.post('/oauth/revoke', body: { token: @token, client_id: @client_id, client_secret: @client_secret })
+        .parsed_response
   end
 
   def playback
