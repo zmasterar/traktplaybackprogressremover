@@ -22,3 +22,4 @@
 
 # doten
 .env
+/config/master.key
