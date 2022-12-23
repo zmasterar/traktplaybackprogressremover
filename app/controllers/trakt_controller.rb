@@ -23,8 +23,10 @@ class TraktController < ApplicationController
 
   def delete_token
     @user = @trakt.user_settings
+    response = @trakt.delete_token
+    return redirect_to root_path, notice: "There has been a problem!" unless response.ok?
+
     User.where(username: @user["user"]["username"]).destroy_all
-    @trakt.delete_token
     cookies.delete :token
     redirect_to root_path, notice: "Access revoked!"
   end

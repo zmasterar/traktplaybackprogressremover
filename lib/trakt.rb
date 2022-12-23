@@ -19,8 +19,15 @@ class Trakt
   end
 
   def delete_token
-    self.class.post('/oauth/revoke', body: { token: @token, client_id: @client_id, client_secret: @client_secret })
-        .parsed_response
+    self.class
+        .post('/oauth/revoke',
+                headers: @headers,
+                body: {
+                  token: @token,
+                  client_id: @client_id,
+                  client_secret: @client_secret
+                }.to_json
+              )
   end
 
   def playback
