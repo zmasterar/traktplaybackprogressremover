@@ -36,9 +36,12 @@ task mail_today_shows: :environment do
 
     mail = trakt.user_settings['user']['location']
     @today_shows = trakt.get_calendar((Date.today + 1).to_s, 1) # Date.today+1 beacuse trakt only works with utc
-    if @today_shows.count.positive?
+    if @today_shows.any?
       thetvdb = Thetvdb.new
-      @today_shows.map! { |show| show.merge({ poster_url: thetvdb.get_poster(show['show']['ids']['tvdb']) }) }
+      @today_shows.map! do |show|
+        tvdb_show_id = show['show']['ids']['tvdb']
+        tvdb_show_id ? show.merge({ poster_url: thetvdb.get_poster(tvdb_show_id) }) : show
+      end
       CalendarMailer.today_shows(mail, @today_shows).deliver_now
       puts 'Sent mail with today_shows'
       puts 'Today shows:'

@@ -15,8 +15,11 @@ class Thetvdb
 
   def get_poster(series_id)
     @headers=@headers.merge({"Authorization": "Bearer #{@token}"})
-    response = self.class.get("/series/#{series_id}/images/query", headers: @headers, query: {keyType: "poster"}).parsed_response["data"].last["thumbnail"]
-    return "https://www.thetvdb.com/banners/"+response
+    response = self.class.get("/series/#{series_id}/images/query", headers: @headers, query: {keyType: "poster"})
+    return nil unless response.parsed_response["data"]
+    
+    thumbnail = response.parsed_response["data"]&.last["thumbnail"]
+    "https://www.thetvdb.com/banners/#{thumbnail}"
   end
 
 end 
