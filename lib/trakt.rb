@@ -11,11 +11,20 @@ class Trakt
       @token = token
     end
     @client_secret = ENV["TRAKT_CLIENT_SECRET"]
-    @redirect_uri = Rails.env.production? ? "https://traktprogressremover.herokuapp.com/token" : "http://localhost:3000/token"
+    @redirect_uri = Rails.env.production? ? "https://traktprogressremover.zmaster.com.ar/token" : "http://localhost:3000/token"
   end
 
   def get_token(code)
-    self.class.post('/oauth/token', headers: @headers, query: {client_id: @client_id, code: code, client_secret: @client_secret, redirect_uri: @redirect_uri, grant_type: "authorization_code"}).parsed_response
+    self.class
+        .post('/oauth/token', 
+                headers: @headers,
+                body: {
+                  client_id: @client_id,
+                  code: code,
+                  client_secret: @client_secret,
+                  redirect_uri: @redirect_uri,
+                  grant_type: "authorization_code"}.to_json
+              ).parsed_response
   end
 
   def delete_token
