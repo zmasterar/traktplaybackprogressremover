@@ -6,7 +6,7 @@ class TraktController < ApplicationController
   end
 
   def authorize
-    redirect_to "https://trakt.tv/oauth/authorize?response_type=code&client_id=#{ENV["TRAKT_CLIENT_ID"]}&redirect_uri=#{root_url}token" #root_url defined in /config/environments/production.rb
+    redirect_to "https://trakt.tv/oauth/authorize?response_type=code&client_id=#{Rails.application.credentials[:production][:trakt_client_id]}&redirect_uri=#{root_url}token" #root_url defined in /config/environments/production.rb
   end
 
   def get_token

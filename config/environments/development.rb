@@ -62,8 +62,8 @@ Rails.application.configure do
    :address              => "smtp.gmail.com",
    :port                 => 587,
    :domain               => "zmaster.com.ar",
-   :user_name            => ENV['GMAIL_USERNAME'],
-   :password             => ENV['GMAIL_PASSWORD'],
+   :user_name            => Rails.application.credentials[:production][:gmail_username],
+   :password             => Rails.application.credentials[:production][:gmail_password],
    :authentication       => "plain",
   :enable_starttls_auto => true
   }

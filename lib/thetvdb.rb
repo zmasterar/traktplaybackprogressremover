@@ -6,9 +6,9 @@ class Thetvdb
 
   def initialize
     @headers = {"Content-Type": "application/json", "Accept": "application/json"}
-    @apikey = ENV["THETVDB_APIKEY"]
-    @username = ENV["THETVDB_USERNAME"]
-    @userkey = ENV["THETVDB_USERKEY"]
+    @apikey = Rails.application.credentials[:production][:thetvdb_apikey]
+    @username = Rails.application.credentials[:production][:thetvdb_username]
+    @userkey = Rails.application.credentials[:production][:thetvdb_userkey]
     response = self.class.post('/login', headers: @headers, body: {apikey: @apikey, userkey: @userkey, username: @username}.to_json).parsed_response
     @token = response["token"]
   end

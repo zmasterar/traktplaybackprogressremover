@@ -5,12 +5,12 @@ class Trakt
 
   def initialize(token=nil)
     @headers = {"Content-Type": "application/json", "trakt-api-version": "2"}
-    @client_id = ENV["TRAKT_CLIENT_ID"]
+    @client_id = Rails.application.credentials[:production][:trakt_client_id]
     if token
       @headers.merge!({"trakt-api-key": @client_id, "Authorization": "Bearer #{token}"})
       @token = token
     end
-    @client_secret = ENV["TRAKT_CLIENT_SECRET"]
+    @client_secret = Rails.application.credentials[:production][:trakt_client_secret]
     @redirect_uri = Rails.env.production? ? "https://traktprogressremover.zmaster.com.ar/token" : "http://localhost:3000/token"
   end
 

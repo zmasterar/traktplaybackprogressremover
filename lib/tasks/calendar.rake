@@ -55,7 +55,7 @@ rescue Net::SMTPAuthenticationError => e
   puts e
 rescue => e
   puts 'Oh, No! Something happend'
-  mail ||= ENV['WEBMASTER_EMAIL']
+  mail ||= Rails.application.credentials[:production][:webmaster_email]
   CalendarMailer.error_email(mail, e).deliver_now
 ensure
   puts 'Task ended'
