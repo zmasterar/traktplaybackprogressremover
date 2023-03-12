@@ -12,7 +12,7 @@
     <p>
     <%= link_to "Home", root_path %>
     <% if cookies[:token] %>
-       | <%= link_to "Items in progress", playback_path %> | <%= link_to "Calendar", calendar_path, class: "btn btn-primary" %>| <%= link_to "Revoke Authorization (log out)", delete_token_path, method: :delete %>
+       | <%= link_to "Items in progress", playback_path %> | <%= link_to "Calendar", calendar_path, class: "btn btn-primary" %>| <%= button_to "Revoke Authorization (log out)", delete_token_path, method: :delete %>
     <% end %>
     </p>
     <h3><%= notice if notice %></h3>
