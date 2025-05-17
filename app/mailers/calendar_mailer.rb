@@ -2,6 +2,7 @@
 
 # Calendar Mailer
 class CalendarMailer < ApplicationMailer
+  helper CalendarsHelper
   default from: 'Trakt playback progress remover <benja@zmaster.com.ar>'
 
   def test
