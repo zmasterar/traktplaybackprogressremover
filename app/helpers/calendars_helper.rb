@@ -11,12 +11,20 @@ module CalendarsHelper
     show["show"]["title"]
   end
 
+  def show_url(show)
+    "https://trakt.tv/shows/#{show["show"]["ids"]["slug"]}"
+  end
+
   def episode_number(show)
     "S"+show["episode"]["season"].to_s.rjust(2, "0")+"E"+show["episode"]["number"].to_s.rjust(2, "0")
   end
 
   def episode_overview(show)
     show["episode"]["overview"]
+  end
+
+  def episode_url(show)
+    "https://trakt.tv/shows/#{show["show"]["ids"]["slug"]}/seasons/#{show["episode"]["season"]}/episodes/#{show["episode"]["number"]}"
   end
 
   def begin_date_str(show)
